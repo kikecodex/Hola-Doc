@@ -16,9 +16,13 @@ google-generativeai==0.3.2
 langchain-community==0.0.20
 pypdf==4.0.1
 
+# PDF Processing
+PyMuPDF==1.23.8
+
 # Utilities
 python-dotenv==1.0.0
 requests==2.31.0
+werkzeug==3.0.1
 
 # Production
 gunicorn==21.2.0
