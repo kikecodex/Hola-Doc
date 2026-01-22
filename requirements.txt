@@ -1,5 +1,6 @@
 # Agente de Contrataciones Públicas - Perú
 # Dependencias del proyecto
+# Cache bust: 2026-01-21T22:46 - Force clean rebuild without PyMuPDF
 
 # Web Framework
 flask==3.0.0
