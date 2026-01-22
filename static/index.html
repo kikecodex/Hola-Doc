@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agente de Contrataciones Públicas | Perú</title>
+    <meta name="description"
+        content="Asesor inteligente especializado en la Ley N° 32069 de Contrataciones Públicas del Perú">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --primary-dark: #003d82;
+            --secondary-color: #00a8e8;
+            --accent-color: #f8b500;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-light: #e9ecef;
+            --gray-medium: #6c757d;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --max-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 1.5rem 0;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .header-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding-bottom: 100px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            margin: 2rem 0 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-dark);
+        }
+
+        /* Cards */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            border: 1px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            border-color: var(--secondary-color);
+        }
+
+        .card-highlight {
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background-color: rgba(0, 168, 232, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-color);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+
+        .card p {
+            color: var(--gray-medium);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-medium);
+            font-weight: 500;
+        }
+
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 380px;
+            max-width: calc(100vw - 60px);
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            max-height: 70vh;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .chat-title {
+            font-weight: 600;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .chat-status {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            display: block;
+        }
+
+        .chat-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .chat-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chat-body {
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 85%;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+
+        .user-message .message-avatar {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .message-content {
+            background: var(--gray-light);
+            padding: 0.9rem 1.2rem;
+            border-radius: 18px;
+            border-top-left-radius: 4px;
+        }
+
+        .user-message .message-content {
+            background-color: var(--primary-color);
+            color: white;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 4px;
+        }
+
+        .chat-input-container {
+            border-top: 1px solid var(--gray-light);
+            padding: 1rem;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-actions button {
+            background: rgba(0, 86, 179, 0.1);
+            color: var(--primary-color);
+            border: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .quick-actions button:hover {
+            background: rgba(0, 86, 179, 0.2);
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        #chatInput {
+            flex: 1;
+            padding: 0.9rem 1.2rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        #chatInput:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(0, 168, 232, 0.1);
+        }
+
+        .send-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .send-button:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Modales */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 20px;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--gray-medium);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--gray-light);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(0, 168, 232, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .calc-result,
+        .analysis-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .upload-zone {
+            border: 2px dashed var(--gray-light);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-zone:hover {
+            border-color: var(--secondary-color);
+            background: rgba(0, 168, 232, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gray-medium);
+        }
+
+        .upload-status,
+        .analysis-result {
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            color: var(--primary-color);
+        }
+
+        .loading-spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(0, 86, 179, 0.2);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .analysis-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .analysis-options label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .analysis-options label:hover {
+            background: var(--light-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 0 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .logo-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .info-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-widget {
+                width: calc(100vw - 30px);
+                right: 15px;
+                bottom: 15px;
+                max-height: 60vh;
+            }
+
+            .chat-body {
+                height: 350px;
+            }
+
+            .message {
+                max-width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .card {
+                padding: 1.2rem;
+            }
+
+            .stat {
+                padding: 1.2rem;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .modal-content {
+                margin: 10px;
+            }
+        }
+
+        /* Utilidades */
+        .hidden {
+            display: none !important;
+        }
+
+        .collapsed {
+            height: 0 !important;
+            overflow: hidden !important;
+        }
+
+        .chat-minimized {
+            height: auto;
+            width: auto;
+        }
+
+        .chat-minimized .chat-body {
+            display: none;
+        }
+
+        .chat-minimized .chat-toggle .toggle-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">🏛️</div>
+                    <div class="logo-text">
+                        <h1>Agente de Contrataciones</h1>
+                        <span class="subtitle">Ley N° 32069 | OECE</span>
+                    </div>
+                </div>
+                <div class="header-badge">
+                    <span class="badge-dot"></span>
+                    <span>Actualizado 2026</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Herramientas para Proveedores -->
+            <h2 class="section-title"><i class="fas fa-tools"></i> Herramientas para Proveedores</h2>
+            <section class="info-cards">
+                <div class="card card-highlight" onclick="openPdfUpload()">
+                    <div class="card-icon"><i class="fas fa-file-pdf"></i></div>
+                    <h3>Analizar Bases</h3>
+                    <p>Sube un PDF y detecta vicios observables</p>
+                    <span class="card-badge">NUEVO</span>
+                </div>
+                <div class="card card-highlight" onclick="askQuestion('¿Cómo formular observaciones a las bases?')">
+                    <div class="card-icon"><i class="fas fa-edit"></i></div>
+                    <h3>Observaciones</h3>
+                    <p>Genera observaciones formales a las bases</p>
+                    <span class="card-badge">NUEVO</span>
+                </div>
+                <div class="card card-highlight"
+                    onclick="askQuestion('¿Cómo verificar si calificaron bien mi propuesta?')">
+                    <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3>Evaluar Propuestas</h3>
+                    <p>Verifica cálculos de evaluación técnica y económica</p>
+                    <span class="card-badge">NUEVO</span>
+                </div>
+                <div class="card card-highlight" onclick="askQuestion('¿Cómo interponer un recurso de apelación?')">
+                    <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
+                    <h3>Apelaciones</h3>
+                    <p>Genera recursos de apelación con fundamentos</p>
+                    <span class="card-badge">NUEVO</span>
+                </div>
+                <div class="card" onclick="openCalculator()">
+                    <div class="card-icon"><i class="fas fa-calculator"></i></div>
+                    <h3>Calculadora</h3>
+                    <p>Determina el procedimiento según monto</p>
+                </div>
+                <div class="card" onclick="askQuestion('¿Cómo calcular penalidades por mora según Art. 163?')">
+                    <div class="card-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <h3>Penalidades</h3>
+                    <p>Calculadora de penalidades Art. 163</p>
+                </div>
+            </section>
+
+            <!-- Información Legal -->
+            <h2 class="section-title"><i class="fas fa-book"></i> Información Legal</h2>
+            <section class="info-cards">
+                <div class="card" onclick="askQuestion('¿Cuáles son los principios de las contrataciones públicas?')">
+                    <div class="card-icon"><i class="fas fa-gavel"></i></div>
+                    <h3>Principios</h3>
+                    <p>15 principios rectores de la Ley 32069</p>
+                </div>
+                <div class="card" onclick="askQuestion('¿Cuáles son los procedimientos de selección vigentes?')">
+                    <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <h3>Procedimientos</h3>
+                    <p>Tipos y requisitos de cada proceso</p>
+                </div>
+                <div class="card" onclick="askQuestion('¿Cuáles son las últimas opiniones de la DTN del OECE?')">
+                    <div class="card-icon"><i class="fas fa-file-contract"></i></div>
+                    <h3>Opiniones OECE</h3>
+                    <p>Pronunciamientos de la DTN</p>
+                </div>
+                <div class="card"
+                    onclick="askQuestion('¿Qué tipos de sanciones aplica el Tribunal de Contrataciones?')">
+                    <div class="card-icon"><i class="fas fa-landmark"></i></div>
+                    <h3>Tribunal</h3>
+                    <p>Sanciones e inhabilitaciones</p>
+                </div>
+                <div class="card" onclick="askQuestion('¿Qué es la JPRD y cuándo es obligatoria?')">
+                    <div class="card-icon"><i class="fas fa-hands-helping"></i></div>
+                    <h3>JPRD</h3>
+                    <p>Junta de Resolución de Disputas</p>
+                </div>
+                <div class="card" onclick="askQuestion('¿Cuáles son los cambios del D.S. 001-2026-EF?')">
+                    <div class="card-icon"><i class="fas fa-star"></i></div>
+                    <h3>Novedades 2026</h3>
+                    <p>Modificaciones al Reglamento</p>
+                </div>
+            </section>
+
+            <!-- Quick Stats -->
+            <section class="quick-stats">
+                <div class="stat">
+                    <span class="stat-value">S/ 5,500</span>
+                    <span class="stat-label">UIT 2026</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">S/ 44,000</span>
+                    <span class="stat-label">Monto mínimo (8 UIT)</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">S/ 485,000</span>
+                    <span class="stat-label">Licitación Pública</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">8 días</span>
+                    <span class="stat-label">Plazo apelar</span>
+                </div>
+            </section>
+        </main>
+
+        <!-- Chat Widget -->
+        <div class="chat-widget" id="chatWidget">
+            <div class="chat-header" onclick="toggleChat()">
+                <div class="chat-header-info">
+                    <div class="chat-avatar"><i class="fas fa-balance-scale"></i></div>
+                    <div>
+                        <span class="chat-title">Asesor Legal IA</span>
+                        <span class="chat-status">En línea</span>
+                    </div>
+                </div>
+                <button class="chat-toggle" id="chatToggle">
+                    <span class="toggle-icon">−</span>
+                </button>
+            </div>
+
+            <div class="chat-body" id="chatBody">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                        <div class="message-avatar"><i class="fas fa-landmark"></i></div>
+                        <div class="message-content">
+                            <p>¡Hola! Soy tu asesor especializado en <strong>contrataciones públicas del Perú</strong>.
+                            </p>
+                            <p>Puedo ayudarte con:</p>
+                            <ul>
+                                <li><i class="fas fa-calculator"></i> Calcular el procedimiento según monto</li>
+                                <li><i class="fas fa-gavel"></i> Explicar principios y artículos de la Ley 32069</li>
+                                <li><i class="fas fa-clipboard-list"></i> Requisitos de cada procedimiento</li>
+                                <li><i class="fas fa-clock"></i> Plazos y etapas del proceso</li>
+                            </ul>
+                            <p><strong>¿En qué puedo ayudarte?</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-input-container">
+                    <div class="quick-actions">
+                        <button onclick="askQuestion('¿Qué procedimiento uso para S/300,000 en bienes?')"><i
+                                class="fas fa-calculator"></i> Calcular</button>
+                        <button onclick="askQuestion('¿Últimas opiniones DTN?')"><i class="fas fa-file-contract"></i>
+                            Opiniones</button>
+                        <button onclick="askQuestion('¿Qué sanciones aplica el Tribunal?')"><i
+                                class="fas fa-landmark"></i> Tribunal</button>
+                    </div>
+                    <div class="chat-input-wrapper">
+                        <input type="text" id="chatInput" placeholder="Escribe tu consulta sobre contrataciones..."
+                            onkeypress="handleKeyPress(event)">
+                        <button class="send-button" onclick="sendMessage()" id="sendButton">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator Modal -->
+        <div class="modal" id="calculatorModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-calculator"></i> Calculadora de Procedimientos</h2>
+                    <button class="modal-close" onclick="closeCalculator()">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="montoInput">Monto estimado (S/)</label>
+                        <input type="number" id="montoInput" placeholder="Ej: 300000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipoSelect">Tipo de contratación</label>
+                        <select id="tipoSelect">
+                            <option value="bienes">Bienes</option>
+                            <option value="servicios">Servicios</option>
+                            <option value="consultoria">Consultoría</option>
+                            <option value="obras">Obras</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" onclick="calculateProcedure()">Calcular</button>
+
+                    <div class="calc-result" id="calcResult"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PDF Upload Modal -->
+        <div class="modal" id="pdfUploadModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-file-pdf"></i> Analizar Bases de Procedimiento</h2>
+                    <button class="modal-close" onclick="closePdfUpload()">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('pdfInput').click()">
+                        <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <p><strong>Arrastra tu PDF aquí</strong></p>
+                        <p>o haz clic para seleccionar</p>
+                        <input type="file" id="pdfInput" accept=".pdf" onchange="handleFileSelect(event)"
+                            style="display:none">
+                    </div>
+                    <div class="upload-status" id="uploadStatus"></div>
+                    <div class="analysis-options">
+                        <label><input type="radio" name="analysisType" value="bases" checked> <i
+                                class="fas fa-search"></i> Detectar vicios en bases</label>
+                        <label><input type="radio" name="analysisType" value="evaluacion"> <i
+                                class="fas fa-check-circle"></i> Verificar cuadro de evaluación</label>
+                        <label><input type="radio" name="analysisType" value="chat"> <i class="fas fa-comments"></i>
+                            Preguntar sobre el documento</label>
+                    </div>
+                    <button class="btn-primary" onclick="uploadAndAnalyze()" id="analyzeBtn" disabled><i
+                            class="fas fa-search"></i> Analizar</button>
+                    <div class="analysis-result" id="analysisResult"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Estado de la aplicación
+        const appState = {
+            chatOpen: true,
+            chatMessages: [],
+            currentPdf: null
+        };
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function () {
+            // Configurar eventos
+            document.getElementById('chatInput').addEventListener('keypress', handleKeyPress);
+
+            // Cargar mensajes del chat si existen
+            loadChatHistory();
+
+            // Mostrar animación de carga inicial
+            setTimeout(() => {
+                addMessageToChat('bot', '¡Bienvenido! Estoy aquí para ayudarte con todas tus consultas sobre la Ley N° 32069 de Contrataciones Públicas. ¿En qué puedo asistirte hoy?');
+            }, 1000);
+        });
+
+        // Funciones del Chat
+        function toggleChat() {
+            const chatWidget = document.getElementById('chatWidget');
+            const chatBody = document.getElementById('chatBody');
+            const toggleIcon = document.querySelector('.toggle-icon');
+
+            if (appState.chatOpen) {
+                chatWidget.classList.add('chat-minimized');
+                toggleIcon.textContent = '+';
+                appState.chatOpen = false;
+            } else {
+                chatWidget.classList.remove('chat-minimized');
+                toggleIcon.textContent = '−';
+                appState.chatOpen = true;
+                // Scroll al final del chat
+                scrollChatToBottom();
+            }
+        }
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // Agregar mensaje del usuario
+            addMessageToChat('user', message);
+            input.value = '';
+
+            // Mostrar indicador de escritura
+            showTypingIndicator();
+
+            // Simular respuesta después de un breve retraso
+            setTimeout(() => {
+                removeTypingIndicator();
+                generateBotResponse(message);
+            }, 1000 + Math.random() * 2000);
+        }
+
+        function askQuestion(question) {
+            const input = document.getElementById('chatInput');
+            input.value = question;
+            sendMessage();
+        }
+
+        function addMessageToChat(sender, text) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+
+            const avatar = sender === 'bot' ? '<i class="fas fa-robot"></i>' : '<i class="fas fa-user"></i>';
+
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${avatar}</div>
+                <div class="message-content">
+                    <p>${text}</p>
+                </div>
+            `;
+
+            chatMessages.appendChild(messageDiv);
+
+            // Guardar en historial
+            appState.chatMessages.push({ sender, text, timestamp: new Date() });
+            saveChatHistory();
+
+            // Scroll al final del chat
+            scrollChatToBottom();
+        }
+
+        function showTypingIndicator() {
+            const chatMessages = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot-message';
+            typingDiv.id = 'typingIndicator';
+
+            typingDiv.innerHTML = `
+                <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                <div class="message-content">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <span>Escribiendo...</span>
+                    </div>
+                </div>
+            `;
+
+            chatMessages.appendChild(typingDiv);
+            scrollChatToBottom();
+        }
+
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        function scrollChatToBottom() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function generateBotResponse(userMessage) {
+            let response = '';
+            const lowerMessage = userMessage.toLowerCase();
+
+            // Respuestas predefinidas basadas en palabras clave
+            if (lowerMessage.includes('procedimiento') || lowerMessage.includes('monto') || lowerMessage.includes('calcular')) {
+                response = `Para determinar el procedimiento de selección según el monto, te recomiendo usar la <strong>Calculadora de Procedimientos</strong>. Solo necesitas ingresar el monto estimado y el tipo de contratación (bienes, servicios, consultoría u obras).\n\nSegún la Ley N° 32069, los procedimientos son:\n1. <strong>Menos de 8 UIT (S/ 44,000)</strong>: Contratación Directa\n2. <strong>De 8 a 80 UIT (S/ 44,001 a 440,000)</strong>: Concurso Público\n3. <strong>Más de 80 UIT (S/ 440,001 en adelante)</strong>: Licitación Pública\n\n¿Te gustaría que abra la calculadora para hacer un cálculo específico?`;
+            } else if (lowerMessage.includes('observación') || lowerMessage.includes('vicio') || lowerMessage.includes('base')) {
+                response = `Para formular observaciones a las bases, debes:\n\n1. <strong>Revisar minuciosamente</strong> las bases del procedimiento\n2. <strong>Identificar vicios</strong> como requisitos innecesarios, condiciones discriminatorias o falta de claridad\n3. <strong>Presentar por escrito</strong> dentro del plazo establecido (generalmente 5 días hábiles después de la publicación)\n4. <strong>Fundamentar jurídicamente</strong> cada observación\n\nTambién puedo analizar un PDF de las bases para detectar posibles vicios. ¿Te gustaría subir un archivo?`;
+            } else if (lowerMessage.includes('apelación') || lowerMessage.includes('recurso') || lowerMessage.includes('impugnar')) {
+                response = `Para interponer un recurso de apelación:\n\n<strong>Plazo:</strong> 8 días hábiles desde la notificación del acto impugnable\n<strong>Requisitos:</strong>\n1. Identificación completa del proveedor\n2. Relación de hechos\n3. Fundamentos de derecho\n4. Documentación sustentatoria\n5. Petición concreta\n\nEl recurso se presenta ante la Entidad y es resuelto por el Tribunal de Contrataciones del Estado. ¿Necesitas ayuda para redactar un recurso específico?`;
+            } else if (lowerMessage.includes('penalidad') || lowerMessage.includes('mora') || lowerMessage.includes('artículo 163')) {
+                response = `Según el <strong>Artículo 163 de la Ley N° 32069</strong>, las penalidades por mora en la ejecución contractual se calculan así:\n\n<strong>Fórmula:</strong> Penalidad = (Monto incumplido × 0.1% × Días de retraso)\n\n<strong>Límite:</strong> No puede exceder del 10% del monto del contrato\n\nEjemplo: Para un contrato de S/ 100,000 con 15 días de retraso:\nPenalidad = 100,000 × 0.001 × 15 = S/ 1,500\n\n¿Te gustaría calcular una penalidad específica?`;
+            } else if (lowerMessage.includes('principio') || lowerMessage.includes('ley 32069')) {
+                response = `La <strong>Ley N° 32069</strong> establece 15 principios rectores de las contrataciones públicas:\n\n1. <strong>Eficiencia</strong>: Maximizar el uso de recursos públicos\n2. <strong>Transparencia</strong>: Acceso a información del proceso\n3. <strong>Igualdad</strong>: Trato igualitario a proveedores\n4. <strong>No discriminación</strong>: Exclusión de requisitos arbitrarios\n5. <strong>Economía</strong>: Obtener el mejor valor por el dinero\n6. <strong>Responsabilidad</strong>: Rendición de cuentas\n7. <strong>Sostenibilidad</strong>: Consideración de impacto ambiental\n8. <strong>Competencia</strong>: Promover participación de proveedores\n9. <strong>Integridad</strong>: Prevención de corrupción\n10. <strong>Probidad</strong>: Conducta ética de funcionarios\n\n¿Te gustaría conocer más sobre algún principio en específico?`;
+            } else if (lowerMessage.includes('opinión') || lowerMessage.includes('dtn') || lowerMessage.includes('oece')) {
+                response = `La <strong>Dirección Técnica Normativa (DTN) del OECE</strong> ha emitido recientemente estas opiniones relevantes:\n\n1. <strong>Opinion 001-2026-DTN/OECE</strong>: Sobre la aplicación del D.S. 001-2026-EF en procesos de selección\n2. <strong>Opinión 045-2025-DTN/OECE</strong>: Sobre criterios de evaluación en licitaciones públicas\n3. <strong>Opinión 032-2025-DTN/OECE</strong>: Sobre la modificación de plazos en contratos de obras\n4. <strong>Opinión 018-2025-DTN/OECE</strong>: Sobre la acreditación de experiencia en consultoría\n\n¿Te interesa algún pronunciamiento en particular?`;
+            } else {
+                response = `Entiendo que tienes una consulta sobre: "${userMessage}". Como asesor especializado en la Ley N° 32069 de Contrataciones Públicas, te recomiendo:\n\n1. Revisar los principios rectores de la ley\n2. Verificar el procedimiento aplicable según el monto\n3. Consultar las últimas opiniones de la DTN del OECE\n4. Considerar los plazos establecidos para cada etapa\n\n¿Puedo ayudarte con algo más específico sobre contrataciones públicas?`;
+            }
+
+            addMessageToChat('bot', response);
+        }
+
+        // Funciones para guardar/cargar historial del chat
+        function saveChatHistory() {
+            try {
+                localStorage.setItem('chatHistory', JSON.stringify(appState.chatMessages));
+            } catch (e) {
+                console.log('No se pudo guardar el historial del chat');
+            }
+        }
+
+        function loadChatHistory() {
+            try {
+                const saved = localStorage.getItem('chatHistory');
+                if (saved) {
+                    const history = JSON.parse(saved);
+                    // Mostrar solo los últimos 5 mensajes para no saturar
+                    const recent = history.slice(-5);
+                    recent.forEach(msg => {
+                        if (msg.sender === 'bot' && msg.text.includes('¡Bienvenido!')) return; // No repetir mensaje de bienvenida
+                        addMessageToChat(msg.sender, msg.text);
+                    });
+                }
+            } catch (e) {
+                console.log('No se pudo cargar el historial del chat');
+            }
+        }
+
+        // Funciones de la Calculadora
+        function openCalculator() {
+            document.getElementById('calculatorModal').classList.add('active');
+        }
+
+        function closeCalculator() {
+            document.getElementById('calculatorModal').classList.remove('active');
+            document.getElementById('calcResult').innerHTML = '';
+            document.getElementById('montoInput').value = '';
+        }
+
+        function calculateProcedure() {
+            const monto = parseFloat(document.getElementById('montoInput').value);
+            const tipo = document.getElementById('tipoSelect').value;
+            const resultDiv = document.getElementById('calcResult');
+
+            if (!monto || monto <= 0) {
+                resultDiv.innerHTML = '<p style="color: var(--danger-color);">Por favor ingresa un monto válido.</p>';
+                return;
+            }
+
+            const UIT = 5500; // UIT 2026
+            const limiteDirecta = 8 * UIT; // 44,000
+            const limiteConcurso = 80 * UIT; // 440,000
+
+            let procedimiento = '';
+            let detalles = '';
+
+            if (monto < limiteDirecta) {
+                procedimiento = 'CONTRATACIÓN DIRECTA';
+                detalles = `
+                    <p><strong>Características:</strong></p>
+                    <ul>
+                        <li>Máxima agilidad en el proceso</li>
+                        <li>No requiere publicación en SEACE</li>
+                        <li>Cotizaciones de al menos 2 proveedores</li>
+                        <li>Plazo máximo de adjudicación: 15 días</li>
+                    </ul>
+                    <p><strong>Requisitos adicionales para ${tipo}:</strong></p>
+                    <ul>
+                        ${tipo === 'obras' ? '<li>Estudio de suelo y expediente técnico básico</li>' : ''}
+                        ${tipo === 'consultoria' ? '<li>Perfil del consultor y plan de trabajo</li>' : ''}
+                        ${tipo === 'servicios' ? '<li>Descripción detallada del servicio</li>' : ''}
+                        ${tipo === 'bienes' ? '<li>Especificaciones técnicas del bien</li>' : ''}
+                    </ul>
+                `;
+            } else if (monto <= limiteConcurso) {
+                procedimiento = 'CONCURSO PÚBLICO';
+                detalles = `
+                    <p><strong>Características:</strong></p>
+                    <ul>
+                        <li>Publicación obligatoria en SEACE (5 días hábiles)</li>
+                        <li>Presentación de propuestas en sobre cerrado</li>
+                        <li>Evaluación por comisión especial</li>
+                        <li>Plazo máximo: 45 días desde convocatoria</li>
+                    </ul>
+                    <p><strong>Requisitos adicionales para ${tipo}:</strong></p>
+                    <ul>
+                        <li>Garantía de seriedad de oferta (1% del valor referencial)</li>
+                        <li>Experiencia previa documentada</li>
+                        ${tipo === 'obras' ? '<li>Expediente técnico completo</li>' : ''}
+                        ${tipo === 'consultoria' ? '<li>Curriculum vitae del equipo consultor</li>' : ''}
+                    </ul>
+                `;
+            } else {
+                procedimiento = 'LICITACIÓN PÚBLICA';
+                detalles = `
+                    <p><strong>Características:</strong></p>
+                    <ul>
+                        <li>Publicación en SEACE (10 días hábiles mínimo)</li>
+                        <li>Proceso más formal y detallado</li>
+                        <li>Posibilidad de visita de obra o reunión de aclaraciones</li>
+                        <li>Plazo máximo: 90 días desde convocatoria</li>
+                    </ul>
+                    <p><strong>Requisitos adicionales para ${tipo}:</strong></p>
+                    <ul>
+                        <li>Garantía de seriedad de oferta (2% del valor referencial)</li>
+                        <li>Mayor exigencia en experiencia y capacidad técnica</li>
+                        <li>Posible precalificación en obras mayores a 500 UIT</li>
+                        ${tipo === 'obras' ? '<li>Estudio definitivo y expediente completo</li>' : ''}
+                    </ul>
+                `;
+            }
+
+            resultDiv.innerHTML = `
+                <h3>Resultado del cálculo</h3>
+                <p><strong>Monto:</strong> S/ ${monto.toLocaleString('es-PE')}</p>
+                <p><strong>Tipo:</strong> ${document.getElementById('tipoSelect').options[document.getElementById('tipoSelect').selectedIndex].text}</p>
+                <div style="background: var(--primary-color); color: white; padding: 1rem; border-radius: var(--border-radius); margin: 1rem 0; text-align: center; font-weight: bold; font-size: 1.2rem;">
+                    ${procedimiento}
+                </div>
+                ${detalles}
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray-medium);"><i class="fas fa-info-circle"></i> Basado en la Ley N° 32069 y su reglamento (D.S. 001-2026-EF). Valores referenciales sujetos a actualización.</p>
+            `;
+        }
+
+        // Funciones para PDF
+        function openPdfUpload() {
+            document.getElementById('pdfUploadModal').classList.add('active');
+        }
+
+        function closePdfUpload() {
+            document.getElementById('pdfUploadModal').classList.remove('active');
+            document.getElementById('uploadStatus').innerHTML = '';
+            document.getElementById('analysisResult').innerHTML = '';
+            document.getElementById('pdfInput').value = '';
+            document.getElementById('analyzeBtn').disabled = true;
+            appState.currentPdf = null;
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            const uploadStatus = document.getElementById('uploadStatus');
+            const analyzeBtn = document.getElementById('analyzeBtn');
+
+            if (!file) return;
+
+            if (file.type !== 'application/pdf') {
+                uploadStatus.innerHTML = '<p style="color: var(--danger-color);"><i class="fas fa-exclamation-circle"></i> Por favor selecciona un archivo PDF válido.</p>';
+                analyzeBtn.disabled = true;
+                return;
+            }
+
+            if (file.size > 10 * 1024 * 1024) { // 10MB límite
+                uploadStatus.innerHTML = '<p style="color: var(--danger-color);"><i class="fas fa-exclamation-circle"></i> El archivo es demasiado grande. Máximo 10MB.</p>';
+                analyzeBtn.disabled = true;
+                return;
+            }
+
+            appState.currentPdf = file;
+            uploadStatus.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="background: var(--success-color); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <p style="font-weight: bold; margin-bottom: 0.25rem;">${file.name}</p>
+                        <p style="font-size: 0.9rem; color: var(--gray-medium);">${(file.size / 1024 / 1024).toFixed(2)} MB - Listo para análisis</p>
+                    </div>
+                </div>
+            `;
+
+            analyzeBtn.disabled = false;
+        }
+
+        function uploadAndAnalyze() {
+            if (!appState.currentPdf) return;
+
+            const analysisType = document.querySelector('input[name="analysisType"]:checked').value;
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const analysisResult = document.getElementById('analysisResult');
+
+            // Deshabilitar botón y mostrar carga
+            analyzeBtn.innerHTML = '<div class="loading-spinner" style="display: inline-block; margin-right: 10px;"></div> Analizando...';
+            analyzeBtn.disabled = true;
+
+            // Simular análisis (en un caso real, aquí se enviaría al servidor)
+            setTimeout(() => {
+                analyzeBtn.innerHTML = '<i class="fas fa-search"></i> Analizar';
+                analyzeBtn.disabled = false;
+
+                let resultText = '';
+
+                if (analysisType === 'bases') {
+                    resultText = `
+                        <h3><i class="fas fa-search"></i> Análisis de Bases</h3>
+                        <p><strong>Documento:</strong> ${appState.currentPdf.name}</p>
+                        <p><strong>Fecha de análisis:</strong> ${new Date().toLocaleDateString('es-PE')}</p>
+                        
+                        <div style="margin: 1.5rem 0; padding: 1rem; background: #fff8e1; border-radius: var(--border-radius); border-left: 4px solid var(--warning-color);">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Posibles vicios detectados:</h4>
+                            <ol>
+                                <li><strong>Requisito de experiencia excesiva</strong> (Art. 45 - Podría ser restrictivo)</li>
+                                <li><strong>Plazo de garantía mayor al regulado</strong> (Art. 162 - Máximo 5 años para obras)</li>
+                                <li><strong>Falta de claridad en criterios de evaluación</strong> (Art. 73 - Deben ser objetivos y cuantificables)</li>
+                                <li><strong>Requisito de marca específica sin justificación</strong> (Art. 37 - Salvo casos excepcionales)</li>
+                            </ol>
+                        </div>
+                        
+                        <div style="margin: 1.5rem 0; padding: 1rem; background: #e8f5e9; border-radius: var(--border-radius); border-left: 4px solid var(--success-color);">
+                            <h4><i class="fas fa-check-circle"></i> Aspectos conformes:</h4>
+                            <ul>
+                                <li>Plazos de ejecución acordes al objeto contractual</li>
+                                <li>Cláusulas de penalidades dentro de parámetros legales</li>
+                                <li>Garantías requeridas en montos adecuados</li>
+                                <li>Forma de pago conforme a normativa</li>
+                            </ul>
+                        </div>
+                        
+                        <p><strong>Recomendación:</strong> Se sugiere formular observaciones a los puntos 1, 3 y 4 antes del vencimiento del plazo para observaciones.</p>
+                    `;
+                } else if (analysisType === 'evaluacion') {
+                    resultText = `
+                        <h3><i class="fas fa-check-circle"></i> Verificación de Cuadro de Evaluación</h3>
+                        <p><strong>Documento:</strong> ${appState.currentPdf.name}</p>
+                        
+                        <div style="overflow-x: auto; margin: 1.5rem 0;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="background: var(--primary-color); color: white;">
+                                        <th style="padding: 0.75rem; text-align: left;">Criterio</th>
+                                        <th style="padding: 0.75rem; text-align: left;">Puntaje máximo</th>
+                                        <th style="padding: 0.75rem; text-align: left;">Observación</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid var(--gray-light);">
+                                        <td style="padding: 0.75rem;">Experiencia del oferente</td>
+                                        <td style="padding: 0.75rem;">30 puntos</td>
+                                        <td style="padding: 0.75rem;"><span style="color: var(--success-color);"><i class="fas fa-check"></i> Conforme</span></td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--gray-light);">
+                                        <td style="padding: 0.75rem;">Metodología de trabajo</td>
+                                        <td style="padding: 0.75rem;">40 puntos</td>
+                                        <td style="padding: 0.75rem;"><span style="color: var(--warning-color);"><i class="fas fa-exclamation-triangle"></i> Subjetivo</span></td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--gray-light);">
+                                        <td style="padding: 0.75rem;">Propuesta económica</td>
+                                        <td style="padding: 0.75rem;">30 puntos</td>
+                                        <td style="padding: 0.75rem;"><span style="color: var(--success-color);"><i class="fas fa-check"></i> Conforme</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div style="margin: 1.5rem 0; padding: 1rem; background: #fff8e1; border-radius: var(--border-radius); border-left: 4px solid var(--warning-color);">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Observaciones importantes:</h4>
+                            <p>El criterio "Metodología de trabajo" presenta subjetividad en su evaluación (falta de indicadores objetivos). Según el Art. 73 de la Ley N° 32069, todos los criterios deben ser <strong>objetivos y cuantificables</strong>.</p>
+                            <p><strong>Recomendación:</strong> Solicitar aclaración o modificación del criterio para hacerlo objetivo.</p>
+                        </div>
+                    `;
+                } else {
+                    resultText = `
+                        <h3><i class="fas fa-comments"></i> Análisis general del documento</h3>
+                        <p><strong>Documento:</strong> ${appState.currentPdf.name}</p>
+                        <p><strong>Tipo identificado:</strong> Bases de procedimiento de selección</p>
+                        <p><strong>Entidad:</strong> [Identificada automáticamente del documento]</p>
+                        <p><strong>Objeto:</strong> Adquisición de bienes / Prestación de servicios</p>
+                        
+                        <div style="margin: 1.5rem 0; padding: 1rem; background: #e3f2fd; border-radius: var(--border-radius); border-left: 4px solid var(--secondary-color);">
+                            <h4><i class="fas fa-info-circle"></i> Información extraída:</h4>
+                            <ul>
+                                <li><strong>Procedimiento:</strong> Concurso Público</li>
+                                <li><strong>Valor referencial:</strong> S/ 250,000 (aproximadamente)</li>
+                                <li><strong>Plazo de ejecución:</strong> 180 días calendario</li>
+                                <li><strong>Garantía de seriedad:</strong> 1% del valor referencial</li>
+                                <li><strong>Fecha límite de consultas:</strong> 5 días hábiles después de publicación</li>
+                                <li><strong>Fecha límite de observaciones:</strong> 5 días hábiles después de publicación</li>
+                            </ul>
+                        </div>
+                        
+                        <p>Puedes hacerme preguntas específicas sobre este documento en el chat principal.</p>
+                    `;
+                }
+
+                analysisResult.innerHTML = resultText;
+            }, 2000);
+        }
+
+        // Cerrar modales al hacer clic fuera de ellos
+        document.addEventListener('click', function (event) {
+            const calculatorModal = document.getElementById('calculatorModal');
+            const pdfModal = document.getElementById('pdfUploadModal');
+
+            if (calculatorModal.classList.contains('active') &&
+                !event.target.closest('.modal-content') &&
+                !event.target.closest('.card') &&
+                !event.target.closest('.btn-primary')) {
+                closeCalculator();
+            }
+
+            if (pdfModal.classList.contains('active') &&
+                !event.target.closest('.modal-content') &&
+                !event.target.closest('.card') &&
+                !event.target.closest('.btn-primary') &&
+                !event.target.closest('#pdfInput')) {
+                closePdfUpload();
+            }
+        });
+    </script>
+</body>
+
+</html>
