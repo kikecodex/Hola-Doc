@@ -1,0 +1,45 @@
+# Render Blueprint - Hola-Doc
+# Documentación: https://render.com/docs/blueprint-spec
+
+services:
+  # Servicio Web Principal (Flask)
+  - type: web
+    name: hola-doc
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: GEMINI_API_KEY
+        sync: false  # Configurar manualmente en Render Dashboard
+      - key: EVOLUTION_API_URL
+        sync: false
+      - key: EVOLUTION_INSTANCE
+        sync: false
+      - key: EVOLUTION_API_KEY
+        sync: false
+      - key: EVOLUTION_DESTINO
+        sync: false
+    healthCheckPath: /health
+
+  # Cron Job - Sincronización SEACE Diaria
+  - type: cron
+    name: seace-sync-diario
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    schedule: "15 13 * * *"  # 8:15 AM Lima (UTC-5 = 13:15 UTC)
+    command: python engine/seace_cron.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: EVOLUTION_API_URL
+        sync: false
+      - key: EVOLUTION_INSTANCE
+        sync: false
+      - key: EVOLUTION_API_KEY
+        sync: false
+      - key: EVOLUTION_DESTINO
+        sync: false
