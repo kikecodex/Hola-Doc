@@ -445,6 +445,133 @@ Después de la conformidad de la última prestación o liquidación.
     },
 
     # =========================================================================
+    # PENALIDADES POR MORA
+    # =========================================================================
+    
+    "calculo_penalidad": {
+        "preguntas": [
+            "calculo de penalidad",
+            "cálculo de penalidad",
+            "como calcular penalidad",
+            "cómo calcular penalidad",
+            "monto de penalidad",
+            "penalidad por mora",
+            "penalidad por atraso",
+            "formula de penalidad",
+            "fórmula de penalidad",
+            "dias de atraso penalidad",
+            "días de atraso penalidad",
+            "contrato penalidad monto",
+            "contrato dias atraso penalidad",
+            "tengo un contrato penalidad",
+            "cual es el monto exacto de la penalidad"
+        ],
+        "respuesta": """💰 **CÁLCULO DE PENALIDADES POR MORA**
+
+📐 **FÓRMULA (Art. 163 del Reglamento D.S. N° 009-2025-EF):**
+
+```
+Penalidad diaria = 0.10 × (Monto del contrato / F × Plazo en días)
+```
+
+**Donde F:** Factor según tipo de contratación
+• Bienes/Servicios/Consultorías: **F = 0.25**
+• Obras: **F = 0.15**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 **EJEMPLO DE CÁLCULO:**
+- Contrato: **S/ 500,000**
+- Plazo: **90 días**
+- Días de atraso: **15 días**
+- Tipo: Bienes (F = 0.25)
+
+**Paso 1:** Penalidad diaria = 0.10 × (500,000 / 0.25 × 90)
+**Paso 2:** Penalidad diaria = 0.10 × (500,000 / 22.5) = 0.10 × 22,222.22
+**Paso 3:** Penalidad diaria = **S/ 2,222.22**
+**Paso 4:** Penalidad total = S/ 2,222.22 × 15 días = **S/ 33,333.33**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ **TOPE MÁXIMO:** La penalidad **NO puede exceder el 10%** del monto del contrato.
+- Tope para S/ 500,000 = S/ 50,000
+
+⚠️ Si alcanza el 10%, la Entidad puede **RESOLVER EL CONTRATO**.
+
+🔢 Usa el módulo **"Penalidades"** para calcular automáticamente.
+
+📚 *Base legal: Art. 163 del Reglamento D.S. N° 009-2025-EF*""",
+    },
+
+    # =========================================================================
+    # AMPLIACIÓN DE PLAZO
+    # =========================================================================
+    
+    "ampliacion_plazo": {
+        "preguntas": [
+            "ampliación de plazo",
+            "ampliacion de plazo",
+            "solicitud de ampliación",
+            "solicitud de ampliacion",
+            "como solicitar ampliación de plazo",
+            "como solicitar ampliacion de plazo",
+            "prórroga de plazo",
+            "prorroga de plazo",
+            "extensión de plazo",
+            "extension de plazo",
+            "caso fortuito contrataciones",
+            "fuerza mayor contrataciones",
+            "atrasos no imputables",
+            "plazo adicional contrataciones",
+            "cuando procede ampliación de plazo",
+            "cuando procede ampliacion de plazo",
+            "requisitos ampliación de plazo",
+            "requisitos ampliacion de plazo",
+            # Preguntas de la versión anterior (compatibilidad)
+            "¿cuándo procede la ampliación de plazo?",
+            "causales ampliacion plazo",
+            "ampliacion de plazo contrato"
+        ],
+        "respuesta": """📅 **AMPLIACIÓN DE PLAZO CONTRACTUAL**
+
+⚖️ **Base Legal:** Arts. 170-173 del Reglamento D.S. N° 009-2025-EF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**¿CUÁNDO PROCEDE?**
+La ampliación de plazo procede cuando el atraso o paralización es causada por:
+
+1️⃣ **Caso Fortuito o Fuerza Mayor** debidamente comprobado
+2️⃣ **Atrasos en el cumplimiento de prestaciones accesorias** de la Entidad
+3️⃣ **Atrasos por causas no imputables al contratista**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**📋 PROCEDIMIENTO:**
+
+| Paso | Descripción | Plazo |
+|------|-------------|-------|
+| 1 | Contratista comunica la causal | Dentro de los **7 días hábiles** de iniciada |
+| 2 | Solicitud formal con sustento | Dentro de los **15 días hábiles** de concluida la causal |
+| 3 | Pronunciamiento de la Entidad | **10 días hábiles** desde recibida la solicitud |
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**📝 DOCUMENTOS REQUERIDOS:**
+• Solicitud escrita indicando la causal invocada
+• Cuantificación del plazo de ampliación solicitado
+• Documentación de sustento (actas, informes, fotos)
+• Nuevo cronograma de ejecución propuesto
+
+**⚠️ IMPORTANTE:**
+• El silencio administrativo es **NEGATIVO**
+• Si no hay pronunciamiento en plazo, se considera denegada
+• El contratista puede interponer recurso impugnativo
+
+📚 *Base legal: Arts. 170-173 del Reglamento D.S. N° 009-2025-EF*""",
+    },
+
+    # =========================================================================
     # CAMBIOS D.S. 001-2026-EF
     # =========================================================================
     
@@ -890,31 +1017,8 @@ Necesidad no prevista en el expediente de contratación.
 📚 *Base legal: Arts. 167-171 del D.S. N° 009-2025-EF*"""
     },
 
-    "ampliacion_plazo": {
-        "preguntas": [
-            "¿cuándo procede la ampliación de plazo?",
-            "causales ampliacion plazo",
-            "como solicitar ampliacion plazo",
-            "ampliacion de plazo contrato"
-        ],
-        "respuesta": """📅 **Ampliación de Plazo**
-
-**Causales:**
-1. Atrasos y/o paralizaciones no imputables al contratista
-2. Aprobación de prestaciones adicionales
-3. Caso fortuito o fuerza mayor comprobado
-
-**Procedimiento:**
-1. Solicitar dentro de **7 días** de conocida la causal
-2. Entidad resuelve en **10 días hábiles**
-3. El **silencio administrativo es negativo**
-
-**Importante:**
-• Debe sustentarse documentalmente
-• No procede solicitud extemporánea
-
-📚 *Base legal: Art. 158-160 del D.S. N° 009-2025-EF*"""
-    },
+    # NOTA: La entrada "ampliacion_plazo" fue consolidada en la sección de PENALIDADES
+    # con información más completa (Arts. 170-173 del Reglamento)
 
     # =========================================================================
     # CONTROVERSIAS
@@ -1009,6 +1113,69 @@ El OECE asume la **supervisión directa** de las JPRD
 
 📚 *Base legal: Art. 73 de la Ley 32069 y D.S. 001-2026-EF*"""
     },
+
+    # =========================================================================
+    # NOTICIAS OECE 2026
+    # =========================================================================
+    
+    "comunicado_001_2026_oece": {
+        "preguntas": [
+            # Preguntas directas sobre el comunicado
+            "comunicado 001-2026 oece consultores de obra",
+            "¿qué dice el comunicado n°001-2026-oece?",
+            "comunicado 001-2026 oece",
+            "comunicado oece consultores",
+            "noticias oece 2026",
+            "noticias oece",
+            # Preguntas sobre categorías
+            "asignación de categorías consultores de obra",
+            "categorías consultores obra ley 32069",
+            "que categorias se otorgan segun el nuevo comunicado",
+            "qué categorías se otorgan según el nuevo comunicado",
+            "categorias de consultores de obra",
+            "categorías de consultores de obra",
+            "nuevas categorias consultores",
+            "nuevas categorías consultores",
+            "recategorizacion consultores obra",
+            "recategorización consultores obra",
+            # Preguntas sobre el proceso
+            "plazo ampliacion categorias consultores",
+            "120 dias habiles consultores",
+            "como ampliar categorias consultores obra",
+            "contratos menores consultores obra",
+            # Pregunta larga original
+            "¿qué dice el comunicado n°001-2026-oece sobre la asignación de especialidades y categorías de consultores de obra según la ley 32069?"
+        ],
+        "respuesta": """📰 **COMUNICADO N°001-2026-OECE** (19 de enero de 2026)
+📋 **Asignación de Especialidades y Categorías de Consultores de Obra**
+
+Este comunicado aplica el numeral 3 de la Cuarta Disposición Complementaria Transitoria del D.S. N° 009-2025-EF.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**🟢 CONSULTORES CON CATEGORÍA A (anterior Ley 30225):**
+• El RNP les otorga **de oficio** TODAS las categorías del Art. 27.2 del Reglamento
+• Solo habilitados para **CONTRATOS MENORES** en sus especialidades
+
+**🟡 CONSULTORES CON CATEGORÍAS B, C o D (anterior Ley 30225):**
+• El RNP les otorga **de oficio y provisionalmente** TODAS las categorías
+• Habilitados para **CUALQUIER procedimiento de selección** en sus especialidades
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏰ **PLAZO IMPORTANTE:**
+• **120 días hábiles** (desde el 19/01/2026) para solicitar **ampliación de categorías**
+• Si **NO** solicitan en plazo → Solo quedan habilitados para contratos menores
+
+📌 **REVALUACIÓN:**
+En la primera reinscripción o ampliación, el OECE revaluará y asignará categorías según el Art. 27 del Reglamento.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔗 **Enlace oficial:** https://www.gob.pe/institucion/oece/noticias/1336986
+
+📚 *Base legal: Cuarta Disposición Complementaria Transitoria del D.S. N° 009-2025-EF, Art. 27 del Reglamento*"""
+    },
 }
 
 
@@ -1017,23 +1184,167 @@ def buscar_respuesta_rapida(pregunta: str) -> str | None:
     """
     Busca una respuesta precalculada para la pregunta.
     Retorna None si no encuentra coincidencia.
+    
+    Sistema mejorado con 3 niveles de búsqueda:
+    1. Coincidencia exacta
+    2. Detección por palabras clave (temas críticos)
+    3. Coincidencia por porcentaje de palabras
     """
     pregunta_lower = pregunta.lower().strip()
     
     # Limpiar caracteres especiales
-    pregunta_clean = pregunta_lower.replace("¿", "").replace("?", "").replace("¡", "").replace("!", "")
+    pregunta_clean = pregunta_lower.replace("¿", "").replace("?", "").replace("¡", "").replace("!", "").replace("°", "")
     
+    # =========================================================================
+    # NIVEL 1: BÚSQUEDA EXACTA
+    # =========================================================================
     for key, data in RESPUESTAS_RAPIDAS.items():
         for pregunta_template in data["preguntas"]:
-            # Búsqueda exacta o muy similar
-            if pregunta_clean == pregunta_template.replace("¿", "").replace("?", ""):
+            template_clean = pregunta_template.replace("¿", "").replace("?", "").replace("°", "").lower()
+            if pregunta_clean == template_clean:
                 return data["respuesta"]
-            
-            # Búsqueda por contenido clave
-            palabras_template = set(pregunta_template.split())
+    
+    # =========================================================================
+    # NIVEL 2: DETECCIÓN POR PALABRAS CLAVE (TEMAS CRÍTICOS)
+    # Detecta automáticamente temas específicos para evitar confusiones
+    # Sistema de EXCLUSIONES para distinguir temas similares
+    # =========================================================================
+    
+    # --- AMPLIACIÓN DE PLAZO (PRIORIDAD ALTA - detectar antes de penalidades) ---
+    # Palabras clave de ampliación de plazo
+    palabras_ampliacion = ["ampliacion", "ampliación", "prorroga", "prórroga", 
+                           "extension", "extensión", "caso fortuito", "fuerza mayor",
+                           "atrasos no imputables", "plazo adicional"]
+    
+    # Si contiene palabras de ampliación Y NO es claramente sobre penalidades
+    if any(palabra in pregunta_clean for palabra in palabras_ampliacion):
+        # Exclusiones: si menciona cálculo/fórmula/monto de penalidad, NO es ampliación
+        exclusiones_ampliacion = ["formula", "fórmula", "calculo", "cálculo", 
+                                   "10%", "tope", "multa", "calcular penalidad"]
+        if not any(excl in pregunta_clean for excl in exclusiones_ampliacion):
+            return RESPUESTAS_RAPIDAS.get("ampliacion_plazo", {}).get("respuesta")
+    
+    # --- PENALIDADES (PRIORIDAD ALTA) ---
+    # Palabras que indican claramente una consulta sobre penalidades
+    palabras_penalidad = ["penalidad", "penalidades", "mora", "multa"]
+    exclusiones_penalidad = ["ampliacion", "ampliación", "prorroga", "prórroga", 
+                             "extension", "extensión", "caso fortuito", "fuerza mayor"]
+    
+    if any(palabra in pregunta_clean for palabra in palabras_penalidad):
+        # Verificar que NO sea una consulta de ampliación que menciona penalidades
+        if not any(excl in pregunta_clean for excl in exclusiones_penalidad):
+            # Si tiene datos de cálculo (monto, días, plazo) → Calcular penalidad
+            if any(x in pregunta_clean for x in ["monto", "dias", "días", "plazo", "s/", "soles", "contrato", "atraso"]):
+                # Esta es una consulta de cálculo de penalidad
+                return RESPUESTAS_RAPIDAS.get("calculo_penalidad", {}).get("respuesta") or \
+                       RESPUESTAS_RAPIDAS.get("penalidades", {}).get("respuesta")
+    
+    # --- PROCEDIMIENTOS DE SELECCIÓN ---
+    if ("procedimiento" in pregunta_clean and "selección" in pregunta_clean) or \
+       ("procedimiento" in pregunta_clean and "seleccion" in pregunta_clean) or \
+       "licitacion" in pregunta_clean or "licitación" in pregunta_clean or \
+       "concurso publico" in pregunta_clean or "concurso público" in pregunta_clean:
+        if "abreviada" in pregunta_clean or "abreviado" in pregunta_clean:
+            return RESPUESTAS_RAPIDAS.get("adjudicacion_simplificada", {}).get("respuesta")
+        return RESPUESTAS_RAPIDAS.get("procedimientos_seleccion", {}).get("respuesta")
+    
+    # --- GARANTÍAS ---
+    if "garantia" in pregunta_clean or "garantía" in pregunta_clean:
+        if "fiel cumplimiento" in pregunta_clean:
+            return RESPUESTAS_RAPIDAS.get("garantia_fiel_cumplimiento", {}).get("respuesta")
+    
+    # --- APELACIÓN ---
+    if "apelacion" in pregunta_clean or "apelación" in pregunta_clean or \
+       "apelar" in pregunta_clean or "recurso" in pregunta_clean:
+        if "impugn" in pregunta_clean or "apel" in pregunta_clean:
+            return RESPUESTAS_RAPIDAS.get("procedimiento_apelacion", {}).get("respuesta")
+    
+    # --- TRIBUNAL DE CONTRATACIONES ---
+    if "tribunal" in pregunta_clean:
+        if "sancion" in pregunta_clean or "sanción" in pregunta_clean or \
+           "inhabilitacion" in pregunta_clean or "inhabilitación" in pregunta_clean:
+            return RESPUESTAS_RAPIDAS.get("tribunal_sanciones", {}).get("respuesta")
+    
+    # --- OECE (antes OSCE) ---
+    if "oece" in pregunta_clean or "osce" in pregunta_clean:
+        if "diferencia" in pregunta_clean:
+            return RESPUESTAS_RAPIDAS.get("diferencia_osce_oece", {}).get("respuesta")
+        return RESPUESTAS_RAPIDAS.get("que_es_oece", {}).get("respuesta")
+    
+    # --- RNP ---
+    if "rnp" in pregunta_clean:
+        if "inscrib" in pregunta_clean or "registro" in pregunta_clean:
+            return RESPUESTAS_RAPIDAS.get("inscripcion_rnp", {}).get("respuesta")
+        if "experiencia" in pregunta_clean and ("reorgan" in pregunta_clean or "fusion" in pregunta_clean or "fusión" in pregunta_clean):
+            return RESPUESTAS_RAPIDAS.get("experiencia_rnp", {}).get("respuesta")
+        return RESPUESTAS_RAPIDAS.get("que_es_rnp", {}).get("respuesta")
+    
+    # --- PRINCIPIOS ---
+    if "principio" in pregunta_clean or "principios" in pregunta_clean:
+        if "cuantos" in pregunta_clean or "cuántos" in pregunta_clean:
+            return RESPUESTAS_RAPIDAS.get("cantidad_principios", {}).get("respuesta")
+        if "nuevo" in pregunta_clean:
+            return RESPUESTAS_RAPIDAS.get("principios_nuevos", {}).get("respuesta")
+        if "cuales" in pregunta_clean or "cuáles" in pregunta_clean or "lista" in pregunta_clean:
+            return RESPUESTAS_RAPIDAS.get("lista_principios", {}).get("respuesta")
+    
+    # --- UIT y MONTOS ---
+    if "uit" in pregunta_clean:
+        return RESPUESTAS_RAPIDAS.get("uit_2026", {}).get("respuesta")
+    if "monto minimo" in pregunta_clean or "monto mínimo" in pregunta_clean or "8 uit" in pregunta_clean:
+        return RESPUESTAS_RAPIDAS.get("monto_minimo", {}).get("respuesta")
+    
+    # --- JPRD ---
+    if "jprd" in pregunta_clean or "junta de prevencion" in pregunta_clean or \
+       "junta de prevención" in pregunta_clean or "junta de resolucion de disputas" in pregunta_clean:
+        return RESPUESTAS_RAPIDAS.get("que_es_jprd", {}).get("respuesta")
+    
+    # --- CAMBIOS 2026 ---
+    if ("cambio" in pregunta_clean or "novedad" in pregunta_clean or "modificacion" in pregunta_clean) and \
+       ("2026" in pregunta_clean or "001-2026" in pregunta_clean or "ds" in pregunta_clean):
+        return RESPUESTAS_RAPIDAS.get("cambios_2026", {}).get("respuesta")
+    
+    # --- IMPEDIMENTOS ---
+    if "impedido" in pregunta_clean or "impedidos" in pregunta_clean or "impedimento" in pregunta_clean:
+        if "parentesco" in pregunta_clean or "grado" in pregunta_clean:
+            return RESPUESTAS_RAPIDAS.get("parentesco_impedimento", {}).get("respuesta")
+        return RESPUESTAS_RAPIDAS.get("quienes_impedidos", {}).get("respuesta")
+    
+    # --- SEACE / PLADICOP ---
+    if "seace" in pregunta_clean:
+        return RESPUESTAS_RAPIDAS.get("que_es_seace", {}).get("respuesta")
+    if "pladicop" in pregunta_clean:
+        return RESPUESTAS_RAPIDAS.get("que_es_pladicop", {}).get("respuesta")
+    
+    # --- Comunicado N°001-2026-OECE - Categorías de Consultores de Obra ---
+    palabras_comunicado = ["comunicado", "001-2026", "oece", "consultores", "obra", "noticias"]
+    palabras_categorias = ["categoria", "categorias", "categoría", "categorías", "recategorizacion", "recategorización", "otorgan", "otorga"]
+    
+    # Detección directa: "nuevo comunicado" + categorías
+    if "nuevo" in pregunta_clean and "comunicado" in pregunta_clean:
+        return RESPUESTAS_RAPIDAS.get("comunicado_001_2026_oece", {}).get("respuesta")
+    
+    # Detección: palabras clave del comunicado + contexto
+    if any(palabra in pregunta_clean for palabra in palabras_comunicado):
+        if any(palabra in pregunta_clean for palabra in palabras_categorias) or \
+           "consultores" in pregunta_clean or "nuevo" in pregunta_clean or \
+           "comunicado" in pregunta_clean:
+            return RESPUESTAS_RAPIDAS.get("comunicado_001_2026_oece", {}).get("respuesta")
+    
+    # Detección: categorías + consultores de obra
+    if ("categoria" in pregunta_clean or "categoría" in pregunta_clean or 
+        "categorias" in pregunta_clean or "categorías" in pregunta_clean):
+        if "consultores" in pregunta_clean or "obra" in pregunta_clean or "nuevo" in pregunta_clean:
+            return RESPUESTAS_RAPIDAS.get("comunicado_001_2026_oece", {}).get("respuesta")
+    
+    # =========================================================================
+    # NIVEL 3: COINCIDENCIA POR PORCENTAJE DE PALABRAS (70%)
+    # =========================================================================
+    for key, data in RESPUESTAS_RAPIDAS.items():
+        for pregunta_template in data["preguntas"]:
+            palabras_template = set(pregunta_template.lower().split())
             palabras_pregunta = set(pregunta_clean.split())
             
-            # Si hay más del 70% de coincidencia en palabras
             if len(palabras_template) > 0:
                 coincidencia = len(palabras_template.intersection(palabras_pregunta)) / len(palabras_template)
                 if coincidencia >= 0.7:

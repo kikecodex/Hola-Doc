@@ -321,7 +321,37 @@ PLAZO DE RESOLUCIÓN:
 - 12 días hábiles
 
 El Tribunal de Contrataciones es parte del OECE.
-Sus resoluciones agotan la vía administrativa."""
+Sus resoluciones agotan la vía administrativa.""",
+
+        # Comunicado N°001-2026-OECE (Noticias OECE)
+        """COMUNICADO N°001-2026-OECE: ASIGNACIÓN DE CATEGORÍAS DE CONSULTORES DE OBRA
+
+Publicado el 19 de enero de 2026 por el OECE.
+
+CONSULTORES CON CATEGORÍA A (conforme al Art. 16 del Reglamento de la Ley 30225):
+El RNP les otorga de oficio TODAS las categorías contempladas en el numeral 27.2 del Art. 27 del Reglamento de la Ley 32069, EXCLUSIVAMENTE para la suscripción de contratos menores en las especialidades que tengan asignadas.
+
+CONSULTORES CON CATEGORÍAS B, C o D (conforme al Art. 16 del Reglamento de la Ley 30225):
+El RNP les otorga de oficio, de manera PROVISIONAL, TODAS las categorías del numeral 27.2 del Art. 27, habilitándolos para participar y/o suscribir contratos en CUALQUIER procedimiento de selección en las especialidades que tengan asignadas.
+
+REVALUACIÓN DE CATEGORÍAS:
+En la primera reinscripción o ampliación de categorías, el OECE procederá a revaluar y asignar las categorías correspondientes según el artículo 27 del Reglamento.
+
+PLAZO IMPORTANTE - 120 DÍAS HÁBILES:
+Los consultores que hayan sido recategorizados de oficio tienen un plazo máximo de 120 días hábiles (desde el 19 de enero de 2026) para solicitar al OECE la ampliación de categorías.
+
+CONSECUENCIA DE NO SOLICITAR EN PLAZO:
+Si no presentan la solicitud dentro del plazo, el OECE asignará de oficio las categorías que les permitan suscribir ÚNICAMENTE contratos menores en las especialidades asignadas.
+
+TRÁMITES EN CURSO:
+Los consultores con procedimientos de inscripción, reinscripción o ampliación en curso al vencimiento del plazo de 180 días del numeral 1 de la Cuarta Disposición Complementaria Transitoria, se les asignarán las categorías según el artículo 27 del Reglamento.
+
+REFERENCIAS LEGALES:
+- Cuarta Disposición Complementaria Transitoria del D.S. N° 009-2025-EF
+- Artículo 27 del Reglamento de la Ley 32069 (categorías de consultores de obra)
+- Artículo 16 del Reglamento de la Ley 30225 (categorías anteriores)
+
+Enlace oficial: https://www.gob.pe/institucion/oece/noticias/1336986"""
     ]
 
 

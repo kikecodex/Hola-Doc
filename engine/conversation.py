@@ -7,7 +7,7 @@ from typing import Dict, Optional
 import time
 
 from config import Config
-import google.generativeai as genai
+from google import genai
 
 # Importar el sistema de respuestas rápidas
 from engine.respuestas_rapidas import buscar_respuesta_rapida
@@ -118,17 +118,15 @@ CONTEXTO ADICIONAL DEL DOCUMENTO RECUPERADO:
 
     def __init__(self):
         """Inicializa el motor de conversación híbrido"""
-        # Configurar Gemini
-        genai.configure(api_key=Config.GEMINI_API_KEY)
+        # Configurar Gemini con nueva API
+        self.client = genai.Client(api_key=Config.GEMINI_API_KEY)
         
         # Inicializar RAG Engine
-        print("📚 Inicializando motor RAG...")
+        print("[RAG] Inicializando motor RAG...")
         self.rag_engine = RagEngine()
         
-        self.model = genai.GenerativeModel(
-            model_name=Config.GEMINI_MODEL,
-            system_instruction=self.SYSTEM_PROMPT.format(rag_context="")
-        )
+        # Guardar configuración del modelo
+        self.model_name = Config.GEMINI_MODEL
         
         # Chats por sesión
         self.chats: Dict[str, any] = {}
@@ -140,22 +138,19 @@ CONTEXTO ADICIONAL DEL DOCUMENTO RECUPERADO:
             "respuestas_gemini": 0
         }
         
-        print("🔷 Motor Híbrido inicializado")
-        print("   ├── Capa 1: Respuestas Rápidas ✅")
-        print("   ├── Capa 2: RAG ✅")
-        print("   └── Capa 3: Gemini Fallback ✅")
+        print("[OK] Motor Hibrido inicializado")
+        print("   |-- Capa 1: Respuestas Rapidas [OK]")
+        print("   |-- Capa 2: RAG [OK]")
+        print("   +-- Capa 3: Gemini Fallback [OK]")
     
     def _get_chat(self, session_id: str, rag_context: str = ""):
         """Obtiene o crea un chat para la sesión"""
         if session_id not in self.chats:
-            # Si se pasa contexto, inyectarlo en el system prompt para esta sesión nueva
-            prompt_con_contexto = self.SYSTEM_PROMPT.format(rag_context=rag_context)
-            
-            model = genai.GenerativeModel(
-                model_name=Config.GEMINI_MODEL,
-                system_instruction=prompt_con_contexto
-            )
-            self.chats[session_id] = model.start_chat(history=[])
+            # Crear nuevo historial de chat para esta sesión
+            self.chats[session_id] = {
+                "history": [],
+                "system_prompt": self.SYSTEM_PROMPT.format(rag_context=rag_context)
+            }
         return self.chats[session_id]
     
     def process(self, message: str, session_id: str = "default") -> str:
@@ -177,21 +172,21 @@ CONTEXTO ADICIONAL DEL DOCUMENTO RECUPERADO:
             if respuesta_rapida:
                 elapsed = (time.time() - start_time) * 1000
                 self.stats["respuestas_rapidas"] += 1
-                print(f"⚡ Respuesta rápida encontrada en {elapsed:.0f}ms")
+                print(f"[FAST] Respuesta rapida encontrada en {elapsed:.0f}ms")
                 return respuesta_rapida
             
             # ═══════════════════════════════════════════════════════════
             # CAPA 2: RAG (Búsqueda Semántica)
             # ═══════════════════════════════════════════════════════════
-            print("🔍 Buscando en documentos RAG...")
+            print("[RAG] Buscando en documentos RAG...")
             rag_results = self.rag_engine.search(message)
             
             if rag_results:
                 rag_context = "\\n\\n".join(rag_results)
-                print(f"📄 Se encontraron {len(rag_results)} fragmentos relevantes")
+                print(f"[RAG] Se encontraron {len(rag_results)} fragmentos relevantes")
                 self.stats["respuestas_rag"] += 1
             else:
-                print("⚠️ No se encontraron documentos relevantes")
+                print("[WARN] No se encontraron documentos relevantes")
             
             # ═══════════════════════════════════════════════════════════
             # CAPA 3: GEMINI FALLBACK
@@ -208,15 +203,49 @@ PREGUNTA DEL USUARIO:
 {message}
 """
             
-            # Recuperar chat existente
-            chat = self._get_chat(session_id)
+            # Recuperar o crear chat para la sesión
+            chat_data = self._get_chat(session_id, rag_context)
             
-            # Enviar mensaje (con o sin contexto extra)
-            response = chat.send_message(final_prompt)
+            # Construir contenido con system prompt e historial
+            contents = []
+            
+            # Agregar system prompt
+            contents.append({
+                "role": "user",
+                "parts": [{"text": f"[INSTRUCCIONES DEL SISTEMA]\n{chat_data['system_prompt']}"}]
+            })
+            contents.append({
+                "role": "model", 
+                "parts": [{"text": "Entendido. Soy INKABOT, tu asesor legal experto en contrataciones publicas del Peru. ¿En que puedo ayudarte?"}]
+            })
+            
+            # Agregar historial previo
+            for msg in chat_data["history"]:
+                contents.append(msg)
+            
+            # Agregar mensaje actual
+            contents.append({
+                "role": "user",
+                "parts": [{"text": final_prompt}]
+            })
+            
+            # Generar respuesta con nueva API
+            response = self.client.models.generate_content(
+                model=self.model_name,
+                contents=contents
+            )
+            
+            # Guardar en historial
+            chat_data["history"].append({"role": "user", "parts": [{"text": message}]})
+            chat_data["history"].append({"role": "model", "parts": [{"text": response.text}]})
+            
+            # Limitar historial a últimos 20 mensajes
+            if len(chat_data["history"]) > 20:
+                chat_data["history"] = chat_data["history"][-20:]
             
             elapsed = (time.time() - start_time) * 1000
             self.stats["respuestas_gemini"] += 1
-            print(f"🤖 Respuesta Gemini generada en {elapsed:.0f}ms")
+            print(f"[AI] Respuesta Gemini generada en {elapsed:.0f}ms")
             
             return response.text
             

@@ -643,7 +643,8 @@ _______________________________
         self, 
         texto_bases: str, 
         analisis_gemini: Dict,
-        valor_referencial: Optional[float] = None
+        valor_referencial: Optional[float] = None,
+        texto_por_pagina: List[Dict] = None
     ) -> Dict:
         """
         Combina análisis IA con validación de reglas legales para máxima precisión
@@ -652,6 +653,7 @@ _______________________________
             texto_bases: Texto extraído del PDF de bases
             analisis_gemini: Resultado del análisis de Gemini
             valor_referencial: VR del proceso (para validaciones proporcionales)
+            texto_por_pagina: Lista de dicts {"pagina": int, "texto": str} para ubicar vicios
             
         Returns:
             Dict con vicios validados, observaciones sugeridas y métricas
@@ -661,8 +663,30 @@ _______________________________
         if not vicios_ia:
             vicios_ia = analisis_gemini.get("vicios", [])
         
-        # 2. Obtener vicios detectados por reglas
+        # 2. Obtener vicios detectados por reglas simples (observaciones.py)
         vicios_reglas = self.analizar_texto_bases(texto_bases)
+        
+        # =====================================================================
+        # NUEVO: Usar también la detección avanzada de 42 vicios (pdf_processor)
+        # =====================================================================
+        try:
+            from engine.pdf_processor import PDFProcessor
+            pdf_proc = PDFProcessor()
+            # Pasar texto_por_pagina para detectar ubicación exacta de cada vicio
+            vicios_avanzados = pdf_proc._detectar_vicios_por_reglas(texto_bases, texto_por_pagina)
+            print(f"🔍 Vicios avanzados detectados: {len(vicios_avanzados)}")
+            vicios_reglas.extend(vicios_avanzados)
+        except Exception as e:
+            print(f"⚠️ Error en detección avanzada: {e}")
+        
+        # =====================================================================
+        # NUEVO: Validación automática con datos cuantificables
+        # =====================================================================
+        datos_cuantificables = analisis_gemini.get("datos_cuantificables", {})
+        vicios_cuantificables = self._validar_datos_cuantificables(datos_cuantificables, valor_referencial)
+        
+        # Agregar vicios cuantificables a las reglas (tienen ALTA prioridad)
+        vicios_reglas.extend(vicios_cuantificables)
         
         # 3. Fusionar y eliminar duplicados
         vicios_fusionados = self._fusionar_vicios(vicios_ia, vicios_reglas)
@@ -693,8 +717,128 @@ _______________________________
             "vicios_baja_probabilidad": len([v for v in vicios_validados if v["probabilidad_acogimiento"] < 0.4]),
             "observaciones_sugeridas": observaciones_sugeridas,
             "procede_formular_observaciones": len(observaciones_sugeridas) > 0,
-            "resumen": self._generar_resumen_analisis(vicios_validados)
+            "resumen": self._generar_resumen_analisis(vicios_validados),
+            "datos_cuantificables": datos_cuantificables  # NUEVO: Incluir datos extraídos
         }
+    
+    def _validar_datos_cuantificables(self, datos: Dict, valor_referencial: Optional[float] = None) -> List[Dict]:
+        """
+        NUEVA FUNCIÓN: Valida datos cuantificables y genera vicios automáticos.
+        Esta función es CRÍTICA para aumentar la detección de vicios.
+        """
+        vicios = []
+        
+        # Usar VR de datos si no se proporciona
+        vr = valor_referencial or datos.get("valor_referencial")
+        
+        # =====================================================================
+        # 1. EXPERIENCIA EXCESIVA (CRÍTICO)
+        # =====================================================================
+        if datos.get("excede_limite_experiencia"):
+            ratio = datos.get("ratio_experiencia_vr", 0)
+            exp = datos.get("experiencia_postor", 0)
+            vicios.append({
+                "tipo": "experiencia_excesiva_confirmada",
+                "detalle": f"Experiencia S/ {exp:,.0f} EXCEDE VR S/ {vr:,.0f} (ratio {ratio}x > 1.0)",
+                "descripcion": f"La experiencia del postor ({ratio}x el VR) excede el límite legal de 1 vez el valor referencial",
+                "severidad": "ALTA",
+                "excede_limite": True,
+                "validado_por_reglas": True,
+                "probabilidad_base": 0.90,  # MUY alta por ser cuantificable
+                "base_legal": "Art. 45 del Reglamento D.S. 009-2025-EF",
+                "ratio": ratio,
+                "monto": exp
+            })
+        elif datos.get("ratio_experiencia_vr") and datos.get("ratio_experiencia_vr") > 0.8:
+            # Advertencia si está cerca del límite
+            ratio = datos.get("ratio_experiencia_vr")
+            vicios.append({
+                "tipo": "experiencia_limite",
+                "detalle": f"Experiencia al {ratio*100:.0f}% del VR - cerca del límite legal",
+                "severidad": "MEDIA",
+                "validado_por_reglas": True,
+                "probabilidad_base": 0.50
+            })
+        
+        # =====================================================================
+        # 2. EXPERIENCIA PERSONAL EXCESIVA
+        # =====================================================================
+        experiencia_personal = datos.get("experiencia_personal", [])
+        if experiencia_personal:
+            max_anios = max(experiencia_personal)
+            if max_anios > 10:
+                vicios.append({
+                    "tipo": "experiencia_personal_excesiva",
+                    "detalle": f"Se exige {max_anios} años de experiencia para personal clave",
+                    "descripcion": f"La experiencia de {max_anios} años para personal es desproporcionada",
+                    "severidad": "ALTA" if max_anios > 15 else "MEDIA",
+                    "excede_limite": True,
+                    "validado_por_reglas": True,
+                    "probabilidad_base": 0.75 if max_anios > 15 else 0.60,
+                    "base_legal": "Art. 29 del Reglamento - Proporcionalidad de requisitos",
+                    "anios": max_anios
+                })
+            elif max_anios > 5:
+                vicios.append({
+                    "tipo": "experiencia_personal_alta",
+                    "detalle": f"Experiencia de {max_anios} años puede limitar participación",
+                    "severidad": "MEDIA",
+                    "validado_por_reglas": True,
+                    "probabilidad_base": 0.45
+                })
+        
+        # =====================================================================
+        # 3. PENALIDAD EXCESIVA
+        # =====================================================================
+        penalidad = datos.get("penalidad_diaria")
+        if penalidad and penalidad > 0.10:
+            vicios.append({
+                "tipo": "penalidad_excesiva_confirmada",
+                "detalle": f"Penalidad diaria {penalidad}% excede el máximo recomendado de 0.10%",
+                "descripcion": f"La penalidad del {penalidad}% puede exceder los límites del Art. 163",
+                "severidad": "ALTA" if penalidad > 0.5 else "MEDIA",
+                "excede_limite": penalidad > 0.5,
+                "validado_por_reglas": True,
+                "probabilidad_base": 0.80 if penalidad > 0.5 else 0.60,
+                "base_legal": "Art. 163 del Reglamento D.S. 009-2025-EF",
+                "penalidad": penalidad
+            })
+        
+        # =====================================================================
+        # 4. PLAZO IRREAL
+        # =====================================================================
+        plazo = datos.get("plazo_ejecucion")
+        if plazo and plazo < 15:
+            vicios.append({
+                "tipo": "plazo_irreal_confirmado",
+                "detalle": f"Plazo de {plazo} días es técnicamente inviable",
+                "descripcion": f"El plazo de ejecución de {plazo} días calendario es irreal",
+                "severidad": "ALTA" if plazo < 7 else "MEDIA",
+                "excede_limite": plazo < 7,
+                "validado_por_reglas": True,
+                "probabilidad_base": 0.85 if plazo < 7 else 0.65,
+                "base_legal": "Art. 16 de la Ley 32069 - Razonabilidad",
+                "plazo": plazo
+            })
+        
+        # =====================================================================
+        # 5. GARANTÍA EXCESIVA
+        # =====================================================================
+        garantia = datos.get("garantia_porcentaje")
+        if garantia and garantia > 10:
+            vicios.append({
+                "tipo": "garantia_excesiva_confirmada",
+                "detalle": f"Garantía del {garantia}% excede el límite legal del 10%",
+                "descripcion": f"La garantía de fiel cumplimiento del {garantia}% excede el límite del Art. 33",
+                "severidad": "ALTA",
+                "excede_limite": True,
+                "validado_por_reglas": True,
+                "probabilidad_base": 0.90,
+                "base_legal": "Art. 33 de la Ley 32069 - Garantía máxima 10%",
+                "garantia": garantia
+            })
+        
+        return vicios
     
     def _fusionar_vicios(self, vicios_ia: List, vicios_reglas: List) -> List[Dict]:
         """Fusiona vicios de IA y reglas eliminando duplicados"""
@@ -831,31 +975,48 @@ _______________________________
     
     def _calcular_probabilidad_acogimiento(self, vicio: Dict) -> float:
         """
-        Calcula la probabilidad de que la observación sea acogida
-        basándose en múltiples factores
+        Calcula la probabilidad de que la observación sea acogida.
+        VERSIÓN MEJORADA: Más agresiva para vicios cuantificables.
         """
-        probabilidad = 0.3  # Base
+        # =====================================================================
+        # CASO ESPECIAL: Vicios con probabilidad base pre-calculada
+        # (vicios cuantificables de _validar_datos_cuantificables)
+        # =====================================================================
+        probabilidad_base = vicio.get("probabilidad_base")
+        if probabilidad_base is not None:
+            # Ya tiene probabilidad calculada, solo ajustar por jurisprudencia
+            juris = vicio.get("jurisprudencia", [])
+            if juris and juris[0] != "No se identificó jurisprudencia específica":
+                probabilidad_base = min(probabilidad_base + 0.05, 0.95)
+            return probabilidad_base
         
-        # +0.3 si está validado por reglas legales
+        # =====================================================================
+        # CASO ESPECIAL: Excede límite numérico verificable → 85% mínimo
+        # =====================================================================
+        if vicio.get("excede_limite"):
+            return max(0.85, vicio.get("probabilidad_base", 0.85))
+        
+        # =====================================================================
+        # LÓGICA ESTÁNDAR MEJORADA
+        # =====================================================================
+        probabilidad = 0.40  # Base subida de 0.3 a 0.4
+        
+        # +0.35 si está validado por reglas legales (subido de 0.3)
         if vicio.get("validado_por_reglas"):
-            probabilidad += 0.3
+            probabilidad += 0.35
         
-        # +0.2 si tiene jurisprudencia aplicable
+        # +0.15 si tiene jurisprudencia aplicable (reducido para no saturar)
         juris = vicio.get("jurisprudencia", [])
         if juris and juris[0] != "No se identificó jurisprudencia específica":
-            probabilidad += 0.2
+            probabilidad += 0.15
         
-        # +0.15 por severidad ALTA
+        # +0.15 por severidad ALTA (subido de 0.15)
         if vicio.get("severidad") == "ALTA":
             probabilidad += 0.15
         elif vicio.get("severidad") == "MEDIA":
-            probabilidad += 0.05
+            probabilidad += 0.08
         
-        # +0.1 si excede límite legal verificable
-        if vicio.get("excede_limite"):
-            probabilidad += 0.1
-        
-        # Ajustar por fuente
+        # +0.05 si fuente es REGLAS
         if vicio.get("fuente") == "REGLAS":
             probabilidad += 0.05
         
